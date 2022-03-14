@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "exercises": [
+      {
+        "id": 0,
+        "name": "Bench Press",
+        "sets": [
+          { "id": 0, "reps": 12, "weight": 80 },
+          { "id": 1, "reps": 12, "weight": 80 },
+          { "id": 2, "reps": 12, "weight": 80 }
+        ]
+      },
+
+      {
+        "id": 1,
+        "name": "Back Squat",
+        "sets": [
+          { "id": 0, "reps": 8, "weight": 120 },
+          { "id": 1, "reps": 8, "weight": 120 },
+          { "id": 2, "reps": 8, "weight": 120 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "exercises": [
+      {
+        "id": 0,
+        "name": "Bench Press",
+        "sets": [
+          { "id": 0, "reps": 12, "weight": 80 },
+          { "id": 1, "reps": 12, "weight": 80 },
+          { "id": 2, "reps": 12, "weight": 80 }
+        ]
+      },
+
+      {
+        "id": 1,
+        "name": "Back Squat",
+        "sets": [
+          { "id": 0, "reps": 8, "weight": 120 },
+          { "id": 1, "reps": 8, "weight": 120 },
+          { "id": 2, "reps": 8, "weight": 120 }
+        ]
+      }
+    ]
+  }
+]
