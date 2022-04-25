@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend.csproj", "{02F4403C-48CF-474F-AC93-E552CB519A9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutsAPI", "WorkoutsAPI.csproj", "{02F4403C-48CF-474F-AC93-E552CB519A9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

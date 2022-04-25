@@ -1,27 +1,42 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, LayoutAnimation } from "react-native";
 
-import ScreenComponent from "../common/components/screenComponent";
+import BaseAppComponent from "../common/components/baseAppComponent";
 import RoutineContainer from "../routine/routineContainer";
-import { setWorkouts } from "../routine/redux/workoutSlice";
-import jsonData from "../appdata.json";
 import { useAppDispatch } from "../store/storeHooks";
+import { fetchExerciseWorkouts } from "../routine/redux/workoutSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import AppActivityIndicator from "../common/components/appActivityIndicator";
+import { Workout } from "../routine/redux/workout";
 
 const RoutinesScreen = () => {
   const dispatch = useAppDispatch();
-  dispatch(setWorkouts(jsonData));
+  const workoutState = useSelector((state: RootState) => state.workouts);
+  const workouts: Workout[] = workoutState.workouts;
+
+  LayoutAnimation.easeInEaseOut();
+
+  useEffect(() => {
+    if (!workoutState.loading) {
+      dispatch(fetchExerciseWorkouts());
+    }
+  }, [dispatch]);
 
   return (
-    <ScreenComponent>
+    <BaseAppComponent>
       <View style={styles.container}>
-        <RoutineContainer />
+        {workouts.length ? (
+          <RoutineContainer workouts={workouts}  />
+        ) : (
+          <AppActivityIndicator />
+        )}
       </View>
-    </ScreenComponent>
+    </BaseAppComponent>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: "center",

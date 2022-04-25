@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import ScreenComponent from "../common/components/screenComponent";
+import BaseAppComponent from "../common/components/baseAppComponent";
 import RoutineContainer from "../routine/routineContainer";
 import { setWorkouts } from "../routine/redux/workoutSlice";
 import jsonData from "../appdata.json";
@@ -12,11 +12,11 @@ const ProfileScreen = () => {
   dispatch(setWorkouts(jsonData));
 
   return (
-    <ScreenComponent>
+    <BaseAppComponent>
       <View style={styles.container}>
         <RoutineContainer />
       </View>
-    </ScreenComponent>
+    </BaseAppComponent>
   );
 };
 

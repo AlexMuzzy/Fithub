@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { View, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import {
@@ -13,13 +15,17 @@ import {
 } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppHeader from "../common/components/appHeader";
-import ScreenComponent from "../common/components/screenComponent";
+import BaseAppComponent from "../common/components/baseAppComponent";
+import { AuthStackParamList } from "../navigation/authAppNavigation";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [rememberAccount, setRememberAccount] = useState(false);
+
+  const routineNavigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
   const { colors } = useTheme();
 
@@ -45,8 +51,14 @@ const LoginScreen = () => {
     },
   });
 
+  const handleLogin = () => {
+    if (username === "alex" && password === "alex") {
+      return routineNavigation.navigate("Routine");
+    }
+  };
+
   return (
-    <ScreenComponent>
+    <BaseAppComponent>
       <SafeAreaView style={styles.container}>
         <View style={styles.topLevelView}>
           <Title style={{ justifyContent: "center", alignItems: "center" }}>
@@ -56,9 +68,10 @@ const LoginScreen = () => {
           </Title>
         </View>
 
-        <KeyboardAvoidingView 
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.bottomLevelView}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.bottomLevelView}
+        >
           <Headline style={{ flex: 0.15 }}>
             <Text>Login</Text>
           </Headline>
@@ -91,7 +104,12 @@ const LoginScreen = () => {
             />
           </View>
           <View
-            style={{ flex: 0.2, flexDirection: "row", alignItems: "center", marginLeft: 20 }}
+            style={{
+              flex: 0.2,
+              flexDirection: "row",
+              alignItems: "center",
+              marginLeft: 20,
+            }}
           >
             <Checkbox
               status={rememberAccount ? "checked" : "unchecked"}
@@ -104,7 +122,7 @@ const LoginScreen = () => {
             <Button
               icon="account"
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={() => handleLogin()}
               style={{ elevation: 5, marginHorizontal: 20 }}
             >
               Login
@@ -112,7 +130,7 @@ const LoginScreen = () => {
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </ScreenComponent>
+    </BaseAppComponent>
   );
 };
 

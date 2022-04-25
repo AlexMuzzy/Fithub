@@ -10,10 +10,9 @@ import RoutinesScreen from "../screens/routinesScreen";
 import ProgressScreen from "../screens/progressScreen";
 import CommunityScreen from "../screens/communityScreen";
 import MessagesScreen from "../screens/messagesScreen";
-import ProfileScreen from "../screens/profileScreen";
 import { useTheme } from "react-native-paper";
 
-export type RootStackParamList = {
+export type BaseStackParamList = {
   Routine: undefined;
   Progress: undefined;
   Community: undefined;
@@ -22,31 +21,31 @@ export type RootStackParamList = {
 };
 
 export type RoutineScreenProps = MaterialBottomTabScreenProps<
-  RootStackParamList,
+  BaseStackParamList,
   "Routine"
 >;
 
 export type ProgressScreenProps = MaterialBottomTabScreenProps<
-  RootStackParamList,
+  BaseStackParamList,
   "Progress"
 >;
 
 export type CommunityScreenProps = MaterialBottomTabScreenProps<
-  RootStackParamList,
+  BaseStackParamList,
   "Community"
 >;
 
 export type MessagesScreenProps = MaterialBottomTabScreenProps<
-  RootStackParamList,
+  BaseStackParamList,
   "Messages"
 >;
 
 export type ProfileScreenProps = MaterialBottomTabScreenProps<
-  RootStackParamList,
+  BaseStackParamList,
   "Profile"
 >;
 
-const Tab = createMaterialBottomTabNavigator<RootStackParamList>();
+const Tab = createMaterialBottomTabNavigator<BaseStackParamList>();
 
 const BaseAppNavigation = () => {
   const { colors } = useTheme();

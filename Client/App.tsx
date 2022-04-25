@@ -14,9 +14,11 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
-import React, { useEffect } from "react";
-import { Appearance, UIManager, useColorScheme } from "react-native";
+import React, { useState } from "react";
+import { Appearance, Platform, UIManager, useColorScheme } from "react-native";
 import LoginScreen from "./screens/loginScreen";
+import RoutinesScreen from "./screens/routinesScreen";
+import AuthAppNavigation from "./navigation/authAppNavigation";
 
 const CombinedDefaultTheme = {
   ...PaperDefaultTheme,
@@ -35,10 +37,16 @@ const CombinedDarkTheme = {
   },
 };
 
-UIManager.setLayoutAnimationEnabledExperimental &&
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export default function App() {
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+
   const colorScheme = Appearance.getColorScheme();
   const deviceColourScheme = useColorScheme();
   const deviceTheme =
@@ -48,7 +56,7 @@ export default function App() {
     <StoreProvider store={store}>
       <PaperProvider theme={deviceTheme}>
         <NavigationContainer theme={deviceTheme}>
-          <LoginScreen/>
+          {userLoggedIn ? <BaseAppNavigation /> : <AuthAppNavigation />}
         </NavigationContainer>
       </PaperProvider>
     </StoreProvider>

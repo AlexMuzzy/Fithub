@@ -1,18 +1,21 @@
 export type ExerciseSet = {
-    id: number
-    reps: number
+    setId: number
     weight: number
+    reps: number
+    groupId: number
 }
 
 export type ExerciseGroup = {
-    id: number
+    groupId: number
     name: string
+    workoutId: number
     sets: ExerciseSet[]
 }
 
 export type Workout = {
-    id: number
-    exercises: ExerciseGroup[];
+    workoutId: number
+    name: string
+    groups: ExerciseGroup[];
 }
 
 export type EditWorkout = {

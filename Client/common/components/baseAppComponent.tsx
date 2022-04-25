@@ -38,7 +38,7 @@ const AppBarHeader = ({isLoggedIn}: AppBarHeaderProps) => {
   );
 };
 
-const ScreenComponent: React.FC<{ children: JSX.Element }> = (props) => {
+const BaseAppComponent: React.FC<{ children: JSX.Element }> = (props) => {
   return (
     <>
       <AppBarHeader isLoggedIn={false}/>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenComponent;
+export default BaseAppComponent;

@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { List, Text } from "react-native-paper";
-import ScreenComponent from "../common/components/screenComponent";
+import BaseAppComponent from "../common/components/baseAppComponent";
 
 const ProgressScreen = () => {
   return (
-    <ScreenComponent>
+    <BaseAppComponent>
         <List.AccordionGroup>
           <List.Accordion title="Accordion 1" id="1">
             <List.Item title="Item 1" />
@@ -23,7 +23,7 @@ const ProgressScreen = () => {
             </List.Accordion>
           </View>
         </List.AccordionGroup>
-    </ScreenComponent>
+    </BaseAppComponent>
   );
 };
 

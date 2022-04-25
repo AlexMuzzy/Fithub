@@ -12,13 +12,9 @@ import {
 import { ExerciseGroup, ExerciseSet, Workout } from "./redux/workout";
 import EditRoutinedialog from "./editRoutineDialog";
 
-type workoutCard = {
-  workout: Workout;
-};
-
-const RoutineList = ({ workout }: workoutCard) => {
+const RoutineList = (workout: Workout) => {
   const { colors } = useTheme();
-  const workoutId = workout.id;
+  const workoutId = workout.workoutId;
 
   return (
     <View>
@@ -26,13 +22,11 @@ const RoutineList = ({ workout }: workoutCard) => {
         <Card.Content>
           <List.Section>
             <List.Subheader>
-              <Title
-                style={{ color: colors.primary }}
-              >{`Workout ${workoutId}`}</Title>
+              <Title style={{ color: colors.primary }}>{workout.name}</Title>
             </List.Subheader>
-            {workout.exercises.map((exerciseGroup: ExerciseGroup) => (
+            {workout.groups.map((exerciseGroup: ExerciseGroup) => (
               <ExerciseGroupList
-                key={exerciseGroup.id}
+                key={exerciseGroup.groupId}
                 {...{ exerciseGroup, workoutId }}
               />
             ))}
@@ -51,12 +45,11 @@ type ExerciseGroupList = {
 const ExerciseGroupList = ({ exerciseGroup, workoutId }: ExerciseGroupList) => {
   // Hook to control list accordion state.
   const [expanded, setExpanded] = React.useState(false);
+  const { colors } = useTheme();
+
   const handlePress = () => {
-    LayoutAnimation.easeInEaseOut();
     setExpanded(!expanded);
   };
-
-  const { colors } = useTheme();
 
   return (
     <List.Accordion
@@ -74,12 +67,16 @@ const ExerciseGroupList = ({ exerciseGroup, workoutId }: ExerciseGroupList) => {
           <DataTable.Title numeric>Edit</DataTable.Title>
         </DataTable.Header>
 
-        {exerciseGroup.sets.map((exerciseSet: ExerciseSet) => {
-          const exerciseGroupId = exerciseGroup.id;
-          const setListObject = { exerciseSet, exerciseGroupId, workoutId };
-          return (
-            <ExerciseSetList key={exerciseSet.id} {...{ ...setListObject }} />
-          );
+        {exerciseGroup.sets.map((exerciseSet: ExerciseSet, index: number) => {
+          const exerciseGroupId = exerciseGroup.groupId;
+          const setNumber = index + 1;
+          const setListObject = {
+            setNumber,
+            exerciseSet,
+            exerciseGroupId,
+            workoutId,
+          };
+          return <ExerciseSetList key={exerciseSet.setId} {...setListObject} />;
         })}
       </DataTable>
     </List.Accordion>
@@ -87,12 +84,14 @@ const ExerciseGroupList = ({ exerciseGroup, workoutId }: ExerciseGroupList) => {
 };
 
 type ExerciseSetList = {
+  setNumber: number;
   exerciseSet: ExerciseSet;
   exerciseGroupId: number;
   workoutId: number;
 };
 
 const ExerciseSetList = ({
+  setNumber,
   exerciseSet,
   exerciseGroupId,
   workoutId,
@@ -105,7 +104,7 @@ const ExerciseSetList = ({
   const hideDialog = () => setVisible(false);
 
   // Obtain ID for the exercise set.
-  const exerciseSetId = exerciseSet.id;
+  const exerciseSetId = exerciseSet.setId;
 
   return (
     <>
@@ -121,9 +120,7 @@ const ExerciseSetList = ({
 
       <DataTable.Row>
         <DataTable.Cell>
-          <Text style={{ color: colors.primary }}>{`Set ${
-            exerciseSet.id + 1
-          }`}</Text>
+          <Text style={{ color: colors.primary }}>{`Set ${setNumber}`}</Text>
         </DataTable.Cell>
         <DataTable.Cell numeric>
           <Text>{`${exerciseSet.weight}kg`}</Text>
