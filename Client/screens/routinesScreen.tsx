@@ -15,8 +15,6 @@ const RoutinesScreen = () => {
   const workoutState = useSelector((state: RootState) => state.workouts);
   const workouts: Workout[] = workoutState.workouts;
 
-  LayoutAnimation.easeInEaseOut();
-
   useEffect(() => {
     if (!workoutState.loading) {
       dispatch(fetchExerciseWorkouts());

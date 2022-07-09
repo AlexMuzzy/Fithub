@@ -7,10 +7,10 @@ import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import RoutinesScreen from "../screens/routinesScreen";
-import ProgressScreen from "../screens/progressScreen";
 import CommunityScreen from "../screens/communityScreen";
 import MessagesScreen from "../screens/messagesScreen";
 import { useTheme } from "react-native-paper";
+import profileScreen from "../screens/profileScreen";
 
 export type BaseStackParamList = {
   Routine: undefined;
@@ -69,7 +69,7 @@ const BaseAppNavigation = () => {
 
       <Tab.Screen
         name="Progress"
-        component={ProgressScreen}
+        component={profileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="chart-line" color={color} size={26} />

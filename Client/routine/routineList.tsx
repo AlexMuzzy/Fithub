@@ -48,6 +48,7 @@ const ExerciseGroupList = ({ exerciseGroup, workoutId }: ExerciseGroupList) => {
   const { colors } = useTheme();
 
   const handlePress = () => {
+    LayoutAnimation.easeInEaseOut();
     setExpanded(!expanded);
   };
 
